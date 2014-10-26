@@ -1,0 +1,58 @@
+*** intrests ***
+id              int(11) unsigned Null => NO  Key => PRI Extra => auto_increment
+name            varchar(255)     Null => YES 
+
+
+*** login ***
+id              int(11) unsigned Null => NO Key => PRI Extra => auto_increment
+username        varchar(255)     Null => NO 
+password        varchar(255)     Null => NO 
+
+
+*** mapping ***
+id              int(11) unsigned Null => NO Key => PRI Extra => auto_increment
+person_id       int(11)          Null => NO 
+table_name      varchar(255)     Null => NO 
+table_id        int(11)          Null => NO 
+
+
+*** moving ***
+id              int(11) unsigned Null => NO  Key => PRI Extra => auto_increment
+mapping_id      int(11)          Null => NO 
+type            varchar(255)     Null => NO 
+planned_date    int(11)          Null => YES 
+price_low       int(11)          Null => YES 
+price_high      int(11)          Null => YES 
+created_at      int(11)          Null => NO 
+updated_at      int(11)          Null => NO 
+
+
+*** person ***
+id              int(11) unsigned Null => NO  Key => PRI Extra => auto_increment
+first_name      varchar(255)     Null => YES 
+last_name       varchar(255)     Null => YES 
+address         varchar(255)     Null => YES 
+city            varchar(255)     Null => YES 
+state           varchar(2)       Null => YES 
+zip             int(11)          Null => YES 
+country         varchar(255)     Null => YES 
+home_phone      varchar(255)     Null => YES 
+mobile_phone    varchar(255)     Null => YES 
+work_phone      varchar(255)     Null => YES 
+email           varchar(255)     Null => YES 
+age             int(11)          Null => YES 
+children        tinyint(4)       Null => YES 
+num_of_children int(11)          Null => YES 
+children_age    varchar(255)     Null => YES 
+created_at      int(11)          Null => NO 
+updated_at      int(11)          Null => NO 
+
+
+*** visiting ***
+id               int(11) unsigned Null => NO  Key => PRI Extra => auto_increment
+reason           varchar(255)     Null => YES 
+visit_date       varchar(255)     Null => YES 
+visit_date_start date             Null => YES 
+visit_date_end   date             Null => YES 
+created_at       int(11)          Null => NO 
+updated_at       int(11)          Null => NO 
