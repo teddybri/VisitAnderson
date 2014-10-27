@@ -45,6 +45,7 @@ var Table = {
 
 var Person = {
     editRow: function(rowId) {
+        //console.log(rowId);
         location.href = "#top";
         /* change value to edit */
         $('#actionType').val('edit');
@@ -58,9 +59,12 @@ var Person = {
         $('#form-email').val($('#person-email-' + rowId).text().replace(/\s/g, ''));
         $('#form-mobile').val($('#person-mobile-' + rowId).text().replace(/\s/g, ''));
         $('#form-home').val($('#person-home-' + rowId).text().replace(/\s/g, ''));
+        $('#form-work').val($('#person-work-' + rowId).text().replace(/\s/g, ''));
         $('#form-address').val($('#person-address-' + rowId).val());
         $('#form-city').val($('#person-city-' + rowId).val());
         $('#form-state').val($('#person-state-' + rowId).val());
         $('#form-zip').val($('#person-zip-' + rowId).val());
+
+        $('#person-id').val(rowId);
     }
 }

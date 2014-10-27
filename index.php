@@ -2,15 +2,15 @@
 include('includes/header.php');
 
 /* database calls */
-if ($currentTable == 'person') { // person table
-    $sql = 'SELECT * FROM person';
+if ($currentTable == 'visitor') { // visitor table
+    $sql = 'SELECT * FROM visitor';
 }
 elseif ($currentTable == 'visiting') { // visiting table
-    /* get from mapping table then join person and visiting table */
-    $sql = 'SELECT person.first_name, person.last_name, person.email, person.id,
+    /* get from mapping table then join visitor and visiting table */
+    $sql = 'SELECT visitor.first_name, visitor.last_name, visitor.email, visitor.id,
                    visiting.reason, visiting.visit_date, visiting.updated_at 
             FROM mapping 
-            INNER JOIN person ON mapping.person_id = person.id
+            INNER JOIN visitor ON mapping.person_id = visitor.id
             INNER JOIN visiting ON mapping.table_id = visiting.id';
 }
 elseif ($currentTable == 'intrests') {
@@ -33,13 +33,21 @@ $queryResult = mysqli_query($con, $sql);
                     </button>
                     <strong>ERROR:</strong> First Name, Last Name, and Email cannot all be blank
                 </div>
-            <?php elseif (isset($_GET['success']) == "add"): ?>
+            <?php elseif (isset($_GET['success']) && $_GET['success'] == "add"): ?>
                 <div class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert">
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
                     <strong>Success!</strong> The person was successfully added.
+                </div>
+            <?php elseif (isset($_GET['success']) && $_GET['success'] == "edit"): ?>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>Success!</strong> The person was successfully edited.
                 </div>
             <?php endif; ?>
 
@@ -67,8 +75,8 @@ $queryResult = mysqli_query($con, $sql);
                         $table = new TableClass(); // instance of the table class
                         /* get the right table */
                         switch ($currentTable) {
-                            case 'person':
-                                $table->personTable($queryResult);
+                            case 'visitor':
+                                $table->visitorTable($queryResult);
                                 break;
                             case 'visiting':
                                 $table->visitingTable($queryResult);

@@ -5,14 +5,14 @@
 */
 class TableClass
 {
-    public function personTable($query)
+    public function visitorTable($query)
     {
         /* check for id in url */
         if (isset($_GET['id']) != null) {
             include('config.php');
-            $sql = 'SELECT * FROM person WHERE `id` = "'.$_GET['id'].'"';
-            $person = mysqli_query($con, $sql);
-            $person = $person->fetch_assoc();
+            $sql = 'SELECT * FROM visitor WHERE `id` = "'.$_GET['id'].'"';
+            $visitor = mysqli_query($con, $sql);
+            $visitor = $visitor->fetch_assoc();
             //die(var_dump($person));
         }
         ?>
@@ -21,7 +21,8 @@ class TableClass
             <div class="row">
                 <form method="POST" action="entites/Person.php">
                 <input type="hidden" id="actionType" name="actionType" value="add">
-                <div class="col-lg-3">
+                <input type="hidden" id="person-id" name="personId" value="">
+                <div class="col-lg-4">
                     <label class="form-label">First Name</label>
                     <input class="form-control input-sm" id="form-fname" name="first_name" value="">
                     <label class="form-label">Last Name</label>
@@ -29,7 +30,7 @@ class TableClass
                     <label class="form-label">Email</label>
                     <input class="form-control input-sm" id="form-email" name="email" value="">
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <label class="form-label">Mobile Phone</label>
                     <input class="form-control input-sm" id="form-mobile" name="mobile_phone" value="">
                     <label class="form-label">Home Phone</label>
@@ -37,7 +38,7 @@ class TableClass
                     <label class="form-label">Work Phone</label>
                     <input class="form-control input-sm" id="form-work" name="work_phone" value="">
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <label class="form-label">Address</label>
                     <input class="form-control input-sm" id="form-address" name="address" value="">
                     <label class="form-label">City</label>
@@ -105,22 +106,6 @@ class TableClass
                             <input class="form-control input-sm" id="form-zip" name="zip" value="">
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    <label class="form-label">Age</label>
-                    <input class="form-control input-sm" name="age" value="">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label class="form-label">Children</label>
-                            <input class="form-control input-sm" name="children" value="">
-                        </div>
-                        <div class="col-lg-6">
-                            <label class="form-label">Number</label>
-                            <input class="form-control input-sm" name="num_of_children" value="">
-                        </div>
-                    </div>
-                    <label class="form-label">Children Age</label>
-                    <input class="form-control input-sm" name="children_age" value="">
                     <br>
                     <button class="pull-right btn btn-green btn-sm" type="submit">
                         <i class="fa fa-check"></i> Save
@@ -164,6 +149,9 @@ class TableClass
                             </span>
                             <span id="person-home-<?php echo $result['id']; ?>">
                                 <?php echo $result['home_phone']; ?>
+                            </span>
+                            <span id="person-work-<?php echo $result['id']; ?>">
+                                <?php echo $result['work_phone']; ?>
                             </span>
                         </td>
                         <td>
