@@ -1,0 +1,46 @@
+<?php
+  if (isset($_GET['pageno'])) {
+    $pageno = $_GET['pageno'];
+  } else {
+    $pageno = 1;
+  }
+  
+  $query = "SELECT count(*) FROM table WHERE ...";
+  $result = mysql_query($query, visitor) or trigger_error("SQL", E_USER_ERROR);
+  $query_data = mysql_fetch_row($result);
+  $numrows = $query_data[0];
+  
+  $rows_per_page = 200;
+  $lastpage      = ceil($numrows/$rows_per_page);
+  
+  $pageno = (int)$pageno;
+  if ($pageno > $lastpage) {
+    $pageno = $lastpage;
+  } // if
+  if ($pageno < 1) {
+    $pageno = 1;
+  }
+  
+  $limit = 'LIMIT ' .($pageno - 1) * $rows_per_page .',' .$rows_per_page;
+  
+  $query = "SELECT * FROM table $limit";
+  $result = mysql_query($query, $db) or trigger_error("SQL", E_USER_ERROR);
+  
+  if ($pageno == 1) {
+    echo " FIRST PREV ";
+  } else {
+    echo " <a href='{$_SERVER['PHP_SELF']}?pageno=1'>FIRST</a> ";
+    $prevpage = $pageno-1;
+    echo " <a href='{$_SERVER['PHP_SELF']}?pageno=$prevpage'>PREV</a> ";
+  }
+  
+  echo " ( Page $pageno of $lastpage ) ";
+  
+  if ($pageno == $lastpage) {
+    echo " NEXT LAST ";
+  } else {
+    $nextpage = $pageno+1;
+    echo " <a href='{$_SERVER['PHP_SELF']}?pageno=$nextpage'>NEXT</a> ";
+    echo " <a href='{$_SERVER['PHP_SELF']}?pageno=$lastpage'>LAST</a> ";
+  }
+?>
